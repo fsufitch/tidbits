@@ -82,4 +82,9 @@ Sensors:   System Temperatures: cpu: 37.0 C mobo: N/A
 Info:      Processes: 242 Uptime: 15m Memory: 3.66 GiB used: 1.15 GiB (31.3%) Shell: Bash inxi: 3.3.06 
 ```
 
+TODO
+====
 
+* Set CSM mode = fixes microSD, but breaks UEFI/bootloader monitor
+* Find onboard Wifi somehow
+* Fully test onboard mobile broadband
