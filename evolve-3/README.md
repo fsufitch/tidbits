@@ -1,7 +1,52 @@
 Evolve III Maestro eBook
 ==========
 
-Super cheapo at Microcenter. 
+Super cheapo at Microcenter. This dir contains notes on making it run with Linux.
+
+Notes
+-----
+
+* Hardware
+    * Soldered storage, RAM. Not upgradeable.
+    * Battery access by unscrewing case. No CMOS battery (main battery zero/removal means BIOS reset)
+    * Cheap-feeling keyboard/touchpad. Touchpad seems quite multitouch-capable (PopOS multitouch function work well).
+
+* Windows works, all features work. RAM usage too high (2+ GB just idle, out of 4 GB).
+
+* Tried live boot of Ubuntu, Kubuntu, Xubuntu, Linux Mint, Pop!_OS, Fedora. Outcome same across all of them:
+    * OK: basic OS, USB, HDMI, camera.
+    * Wifi: Device does not exist (even in `lsusb`/`lspci`). See below.
+    * Bluetooth: Device exists, but is named as if it's Wifi instead. See: https://linux-hardware.org/?id=usb:0bda-d723
+    * MicroSD: Device does not exist (even in `lsusb`/`lspci`). See "BIOS Fixes" below.
+
+* Installed Ubuntu for further experimentation.
+
+Wifi Fix
+-----
+
+Tried USB Wifi dongle. [TP-Link Nano AC600 USB Wifi Adapter (Archer T2U Nano)](https://smile.amazon.com/dp/B07PB1X4CN).
+
+* Does not work immediately. Needs additional driver.
+* https://linux-hardware.org/?id=usb:2357-011e
+* Driver: https://github.com/aircrack-ng/rtl8812au, installed using `dkms`
+* Success.
+
+BIOS/UEFI Fixes
+-----
+
+Way too many options; OEM level?
+
+**CSM Support**
+
+* Poor UEFI support for Linux.
+* Enabling "CSM Support" made microSD card reader work.
+* However, CSM breaks keyboard/screen before OS boot.
+    * Once Ubuntu boots, hardware starts working. Black screen for UEFI screen and GRUB bootloader, though.
+a
+
+
+Mysterious "OS Selection" choice in the "South Bridge" configuration.
+
 
 `inxi -F`
 -----
@@ -35,3 +80,5 @@ Sensors:   System Temperatures: cpu: 37.0 C mobo: N/A
            Fan Speeds (RPM): N/A 
 Info:      Processes: 242 Uptime: 15m Memory: 3.66 GiB used: 1.15 GiB (31.3%) Shell: Bash inxi: 3.3.06 
 ```
+
+
