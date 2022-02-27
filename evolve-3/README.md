@@ -42,10 +42,11 @@ Way too many options; OEM level?
 * Enabling "CSM Support" made microSD card reader work.
 * However, CSM breaks keyboard/screen before OS boot.
     * Once Ubuntu boots, hardware starts working. Black screen for UEFI screen and GRUB bootloader, though.
-a
 
 
 Mysterious "OS Selection" choice in the "South Bridge" configuration.
+
+![](mystery-os-selection.jpg)
 
 
 `inxi -F`
