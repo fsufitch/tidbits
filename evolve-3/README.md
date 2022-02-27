@@ -86,5 +86,6 @@ TODO
 ====
 
 * Set CSM mode = fixes microSD, but breaks UEFI/bootloader monitor
+    * Maybe lower Grub wait time and let it be?
 * Find onboard Wifi somehow
 * Fully test onboard mobile broadband
