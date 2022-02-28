@@ -26,7 +26,7 @@ Once finished, go to `Save & Exit` and hit `Save Changes and Reset`.
 Part 2: OS Install
 =====
 
-With the computer off, plug in a USB drive with your choice of Linux on it.  These steps assume it is Ubuntu.
+With the computer off, plug in a USB drive with your choice of Linux on it.  These steps assume it is [Linux Mint 20.3 Cinnammon](https://linuxmint.com/edition.php?id=292).
 
 Turn the computer on. Hold ESC or DEL to enter BIOS config.
 
@@ -62,12 +62,14 @@ If everything is OK, run the OS installer. The easy way is to tell it to erase a
 >   * Create partition table, using type `msdos`. The SD card uses the older/simpler `msdos` instead since it doesn't need the fancy features of `gpt`.
 >   * New partition. All the space, type `ext4`, named and labeled `sdcard`. This will be found in `/sdcard` in the installed OS.
 >
-> Apply the changes and run the installer. When asked what to do about the disk, go into advanced mode. Then, select each of the partitions you created above, and give them a "mount point":
+> Apply the changes and run the installer. When asked what to do about the disk, go into advanced mode. Then, select each of the partitions you created above, and give them a "mount point" (keep other options same as above, and reformatting is unnecessary):
 >
-> * `efi` mounts to `/boot`
+> * `efi` mounts to `/boot`; in the Mint installer, you should instead tell it to "Use as: EFI System Partition"
 > * `swap` is not mounted
 > * `root` mounts to `/`
 > * `sdcard` mounts to `/sdcard`
+>
+> Make sure to configure `/dev/mmcblk0` as the bootloader device.
 
 Follow through on the remaining instructions. Restart and boot into the new OS.
 
