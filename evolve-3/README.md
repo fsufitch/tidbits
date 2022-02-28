@@ -21,7 +21,7 @@ Notes
 
 * Installed Ubuntu for further experimentation.
 
-Wifi Fix
+Wifi Workaround, USB dongle
 -----
 
 Tried USB Wifi dongle. [TP-Link Nano AC600 USB Wifi Adapter (Archer T2U Nano)](https://smile.amazon.com/dp/B07PB1X4CN).
@@ -31,26 +31,42 @@ Tried USB Wifi dongle. [TP-Link Nano AC600 USB Wifi Adapter (Archer T2U Nano)](h
 * Driver: https://github.com/aircrack-ng/rtl8812au, installed using `dkms`
 * Success.
 
+Actual Wifi Fix
+-----
+
+Integrated chip is labeled "RTL8723DU", which is *not* the device that comes up when searching for `0bda:d723`. The driver at Linux Hardware is WRONG!
+
+Actual correct driver: https://github.com/lwfinger/rtl8723du
+
+Follow instructions in the README, then load mod `8723du`.
+
+Additionally, need `usb-devices` rather than `lsusb` to diagnose this and see if the driver is loaded.
+
 BIOS/UEFI Fixes
 -----
 
 Way too many options; OEM level?
 
-**CSM Support**
+### CSM Support
 
 * Poor UEFI support for Linux.
 * Enabling "CSM Support" made microSD card reader work.
 * However, CSM breaks keyboard/screen before OS boot.
-    * Once Ubuntu boots, hardware starts working. Black screen for UEFI screen and GRUB bootloader, though.
+    * Once Ubuntu boots, microSD starts working. Black screen for UEFI screen and GRUB bootloader, though.
+* Leave "off".
 
+### Mysterious "OS Selection"
 
-Mysterious "OS Selection" choice in the "South Bridge" configuration.
+In the "South Bridge" configuration.
 
 ![](mystery-os-selection.jpg)
 
+**Right choice: Android.** This makes the microSD start working *but also* does not break pre-boot BIOS/UEFI GUI/keyboard.
 
 `inxi -F`
 -----
+
+(outdated)
 
 ```
 System:    Host: jurassic Kernel: 5.13.0-30-generic x86_64 bits: 64 Console: tty pts/0 Distro: Ubuntu 21.10 (Impish Indri) 
@@ -85,7 +101,6 @@ Info:      Processes: 242 Uptime: 15m Memory: 3.66 GiB used: 1.15 GiB (31.3%) Sh
 TODO
 ====
 
-* Set CSM mode = fixes microSD, but breaks UEFI/bootloader monitor
-    * Maybe lower Grub wait time and let it be?
-* Find onboard Wifi somehow
+* Load wifi on boot. 
+* Automate kernel module rebuild on kernel update?
 * Fully test onboard mobile broadband
