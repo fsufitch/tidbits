@@ -46,11 +46,30 @@ Confirm other stuff works:
 * Mobile broadband is detected as a feature (though it will be "unavailable").
 * MicroSD card reader.
 
-If everything is OK, install the OS. Tell it to erase and use the whole disk. *Do not encrypt the drive* (it's slow enough as is). Let it update as it installs.
+If everything is OK, run the OS installer. The easy way is to tell it to erase and use the whole disk (for the hard way, see the Optional section below). *Do not encrypt the drive* (it's slow enough as is). Let it update as it installs.
 
-> *Optional:* When configuring the drive, increase swap space to 4 GB. This serves as "fallback" RAM, and may help the computer stay stable if it runs out of its paltry RAM.
+> ### Optional: Manual Disk Partitioning 
+> This stuff is optional, but results in a more stable and reasonable setup, in my opinion. 
+>
+> Open the "GParted" (GNOME Partition Editor) application. Verify that the local drive shows up as `/dev/mmcblk0` and the inserted SD card as `/dev/mmcblk1`. Apply these operations:
+>
+> * `/dev/mmcblk0`:
+>   * Create partition table (check under Device), using type `gpt`. This forgets all data about partitions, filesystems, etc and "resets" the drive (using the modern GPT standard).
+>   * New partition (right click the unallocated space). 500 MiB size, primary, type `fat32`, named and labeled `efi`. This is where the BIOS will find info on how to boot the OS.
+>   * New partition. 4000 MiB size, primary, type `linux-swap`, named and labeled `swap`. Swap is an "overflow" area if the computer runs out of RAM.
+>   * New partition. All the remaining space, primary, type `ext4`, named and labeled `root`. This will be the root `/` path in the installed OS.
+> * `/dev/mmcblk1`:
+>   * Create partition table, using type `msdos`. The SD card uses the older/simpler `msdos` instead since it doesn't need the fancy features of `gpt`.
+>   * New partition. All the space, type `ext4`, named and labeled `sdcard`. This will be found in `/sdcard` in the installed OS.
+>
+> Apply the changes and run the installer. When asked what to do about the disk, go into advanced mode. Then, select each of the partitions you created above, and give them a "mount point":
+>
+> * `efi` mounts to `/boot`
+> * `swap` is not mounted
+> * `root` mounts to `/`
+> * `sdcard` mounts to `/sdcard`
 
-Follow through on the instructions. Restart and boot into the new OS.
+Follow through on the remaining instructions. Restart and boot into the new OS.
 
 Re-check the things from above. Additionally, make sure "Suspend" (sleep mode) works.
 
