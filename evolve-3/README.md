@@ -42,6 +42,8 @@ Follow instructions in the README, then load mod `8723du`.
 
 Additionally, need `usb-devices` rather than `lsusb` to diagnose this and see if the driver is loaded.
 
+To load on boot, add `8723du` to `/etc/modules.d/wifi.conf`.
+
 BIOS/UEFI Fixes
 -----
 
@@ -63,8 +65,12 @@ In the "South Bridge" configuration.
 
 **Right choice: Android.** This makes the microSD start working *but also* does not break pre-boot BIOS/UEFI GUI/keyboard.
 
-`inxi -F`
+`Hardware Scan`
 -----
+
+`hw-probe`: https://linux-hardware.org/?probe=75ca7615ac
+
+`inxi -F`:
 
 ```
 System:    Host: jurassic Kernel: 5.13.0-32-generic x86_64 bits: 64 Console: tty pts/0 Distro: Ubuntu 21.10 (Impish Indri) 
@@ -100,6 +106,5 @@ Info:      Processes: 257 Uptime: 2h 21m Memory: 3.67 GiB used: 1.7 GiB (46.4%) 
 TODO
 ====
 
-* Load wifi on boot. 
 * Automate kernel module rebuild on kernel update?
 * Fully test onboard mobile broadband
