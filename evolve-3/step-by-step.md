@@ -58,7 +58,7 @@ If everything is OK, run the OS installer. The easy way is to tell it to erase a
 >   * New partition (right click the unallocated space). 500 MiB size, primary, type `fat32`, named and labeled `efi`. This is where the BIOS will find info on how to boot the OS.
 >   * New partition. 4000 MiB size, primary, type `linux-swap`, named and labeled `swap`. Swap is an "overflow" area if the computer runs out of RAM.
 >   * New partition. All the remaining space, primary, type `ext4`, named and labeled `root`. This will be the root `/` path in the installed OS.
-> * `/dev/mmcblk1`:
+> * `/dev/mmcblk1`: (you can ignore this section if you want the SD card to be "removable" and not part of the core system)
 >   * Create partition table, using type `msdos`. The SD card uses the older/simpler `msdos` instead since it doesn't need the fancy features of `gpt`.
 >   * New partition. All the space, type `ext4`, named and labeled `sdcard`. This will be found in `/sdcard` in the installed OS.
 >
@@ -126,5 +126,25 @@ Reboot. The module should load automatically and you should have wifi immediatel
 
 Part 4: User Setup and Customization
 =====
+
+### Regular User Access to `/sdcard`
+
+> This is unnecessary if you did not use the system-bound SD card in the optional install. The SD card will be found under `/media/<username>/<some_id>/` and show up in file managers as a separate entry.
+
+By default, you as a user only have the ability to use files in `/home/<username>/`. Since the SD card is at `/sdcard`, by default only administrators (root) can use it. You can set up a directory of your own in there, along with a symlink (shortcut) to access it right from your home dir.
+
+Create it:
+
+    sudo mkdir /sdcard/$USER
+    
+Make it yours:
+
+    sudo chown -R $USER:$USER /sdcard/$USER
+    
+Create the shortcut:
+
+    ln -s /sdcard/$USER ~/sdcard
+    
+Now, if you were to use your file explorer to enter the `sdcard` diretory in your home, anything put in there gets placed on the SD card.
 
 Have fun! :D
