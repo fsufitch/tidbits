@@ -1,6 +1,8 @@
 
 #no-resolv
 no-hosts
+
+bogus-priv
 interface=enp1s0f1
 
 domain=sufitchi.home
@@ -10,8 +12,8 @@ addn-hosts=/etc/dnsmasq.hosts
 
 dhcp-range=10.10.11.1,10.10.255.250,12h
 
-# TODO fill this
-dhcp-host=11:22:33,wap1,10.10.10.11
+# MAC of router is explicitly wap1
+dhcp-host=98:DA:C4:F9:05:FC,wap1,10.10.10.11
 
 
 dhcp-option=option:ntp-server,144.172.118.20,137.220.57.186,69.164.202.100,72.30.35.88
