@@ -1,0 +1,4 @@
+auto enp1s0f1
+iface enp1s0f1 inet static
+	address 10.10.10.10
+	netmask 255.255.0.0
