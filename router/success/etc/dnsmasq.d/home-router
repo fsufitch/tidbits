@@ -1,0 +1,35 @@
+
+#no-resolv
+no-hosts
+interface=enp1s0f1
+
+domain=sufitchi.home
+addn-hosts=/etc/dnsmasq.hosts
+
+### DHCP config
+
+dhcp-range=10.10.11.1,10.10.255.250,12h
+
+# TODO fill this
+dhcp-host=11:22:33,wap1,10.10.10.11
+
+
+dhcp-option=option:ntp-server,144.172.118.20,137.220.57.186,69.164.202.100,72.30.35.88
+dhcp-option=option:dns-server,10.10.10.10
+dhcp-option=vendor:MSFT,2,1i
+
+dhcp-lease-max=1000
+
+
+# Set these?
+#dhcp-authoritative
+#dhcp-rapid-commit
+
+
+### DNS config
+
+strict-order
+server=192.168.1.1
+server=8.8.8.8
+server=8.8.4.4
+

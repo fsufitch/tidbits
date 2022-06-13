@@ -9,8 +9,10 @@ Notes:
 	sudo chown root /etc/network/if-pre-up.d/iptables ; chmod 755 /etc/network/if-pre-up.d/iptables1
 * When iptables config changes (including now), run:
 	sudo /etc/network/if-pre-up.d/iptables
-* Install: isc-dhcp-server
+* Install: dnsmasq
 * Run:
-	sudo /etc/init.d/isc-dhcp-server restart
-* Install: bind9
+	sudo systemctl enable dnsmasq
+	sudo systemctl restart dnsmasq
+* Restart dnsmasq anytime config changes or cache should be flushed
+
 
